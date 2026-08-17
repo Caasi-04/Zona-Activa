@@ -1,0 +1,6 @@
+1- se listan los clientes 2 veces
+2- cliente no encontrado al reservar sale 2 veces
+3- deja agregar a lista de espera alguien que ya está asignado además de no esperar para limpiar pantalla
+4- deja agregar varias veces a la lista de espera la misma persona
+5- reportes no deja tiempo para ver resultado antes de limpiar
+6- no da el numero de reserva por lo que cancelar es complicado, aunque el método de cancelar si funciona
