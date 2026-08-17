@@ -61,3 +61,10 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+###############################################################################
+# Ignore non-C++ vendor/build files for GitHub language stats
+###############################################################################
+*.sh linguist-vendored
+*.bat linguist-vendored
+*.cmd linguist-vendored
+*.ps1 linguist-vendored
