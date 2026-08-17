@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Zona Activa\\x64\\Debug\\Menu.obj",
+            "outputs": [
+                "Zona Activa\\x64\\Debug\\Menu.h.obj.dt.module.json",
+                "Zona Activa\\x64\\Debug\\Menu.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

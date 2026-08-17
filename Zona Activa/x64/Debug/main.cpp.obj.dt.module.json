@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Zona Activa\\x64\\Debug\\main.obj",
+            "outputs": [
+                "Zona Activa\\x64\\Debug\\main.cpp.obj.dt.module.json",
+                "Zona Activa\\x64\\Debug\\main.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

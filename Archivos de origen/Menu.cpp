@@ -8,6 +8,26 @@ Menu::Menu(){
 	espera = new ColeccionEspera();
 }
 
+void Menu::limpiarPantalla(){
+	/*
+	
+	- Seria mas facil con el #include "windows.h" y system("cls") pero las indicaciones del proyecto lo impiden
+
+	- Evitar usar system("cls") para cumplir restricciones de encabezados.
+
+	- Imprime varias líneas en blanco para simular limpieza de pantalla.
+	
+	*/
+	cout << string(100, '\n');
+}
+
+void Menu::esperarEnter()
+{
+	cout << "\nPresione Enter para continuar...";
+	string tmp;
+	getline(cin, tmp);
+}
+
 Menu::~Menu(){
 	// Libera la memoria de las colecciones (verificar punteros antes de eliminar)
 	if (canchas != NULL) { delete canchas; canchas = NULL; }
@@ -63,6 +83,8 @@ void Menu::mostrarMenu() {
 	int opcion = 0;
 
 	while (opcion != 6) { // Mientras no seleccione salir
+
+		limpiarPantalla();
 		cout << endl << "--- Zona Activa - Menu Principal ---" << endl;
 		cout << "1. Gestion Canchas" << endl;
 		cout << "2. Gestion Clientes" << endl;
@@ -75,6 +97,7 @@ void Menu::mostrarMenu() {
 
 		switch (opcion) {
 		case 1: { //Gestion Canchas
+			limpiarPantalla();
 			// Bloque encerrado con {} para declarar variables locales sin error
 			cout << endl << "-- Gestion Canchas --" << endl;
 			cout << endl << "1. Agregar Cancha\n2. Modificar Precio\n3. Poner Mantenimiento\n4. Liberar Mantenimiento\n5. Listar Canchas" << endl << endl;
@@ -96,6 +119,7 @@ void Menu::mostrarMenu() {
 					cout << "Error al agregar (codigo duplicado o lleno)."<< endl ;
 					delete c;//elimina la cancha creada si no se pudo agregar a la coleccion
 				}
+				esperarEnter();
 
 			}else if (s == 2) {//Modificar precio
 
@@ -104,6 +128,7 @@ void Menu::mostrarMenu() {
 
 				if (canchas->modificarPrecio(codigo, precio)) {cout << "Precio modificado." << endl;}
 				else {cout << "Cancha no encontrada." << endl;}
+				esperarEnter();
 			
 			}else if (s == 3) {//Poner mantenimiento
 
@@ -112,6 +137,7 @@ void Menu::mostrarMenu() {
 
 				if (canchas->ponerMantenimiento(codigo, franja)) { cout << "Puesta en mantenimiento." << endl; }
 				else { cout << "No se pudo poner mantenimiento." << endl; }
+				esperarEnter();
 
 			}else if (s == 4) {//Liberar mantenimiento
 
@@ -120,6 +146,7 @@ void Menu::mostrarMenu() {
 
 				if (canchas->liberarMantenimiento(codigo, franja)) { cout << "Liberada de mantenimiento." << endl; }
 				else { cout << "No se pudo liberar mantenimiento." << endl; }
+				esperarEnter();
 			
 			}else if (s == 5) {//Listar canchas
 
@@ -134,14 +161,16 @@ void Menu::mostrarMenu() {
 					for (int f = 0; f < 12; ++f) { cout << c->getFranja(f) << " "; }
 					cout << endl << "____________________________________________________________________" << endl;
 				}
+				esperarEnter();
 			}
 			break;
 
 		}//cierra el bloque de case 1 para que las variables locales no den error
 
 		case 2: {//Gestion Clientes
+			limpiarPantalla();
 			cout << endl << "-- Gestion Clientes --" << endl;
-			cout << endl << "1. Registrar Cliente\n2. Buscar por ID\n3. Listar Clientes" << endl << endl;
+			cout << endl << "1. Registrar Cliente\n2. Buscar por Cedula\n3. Listar Clientes" << endl << endl;
 			int s = leerEntero("Seleccione: ");
 			if (s == 1) {//Registrar cliente
 				string id = leerLinea("Cedula: ");
@@ -156,22 +185,25 @@ void Menu::mostrarMenu() {
 					cout << "Error: Cedula duplicada o lleno.\n";
 					delete cl;
 				}
+				esperarEnter();
 
 			}else if (s == 2) {//Buscar por Cedula
 
 				string id = leerLinea("Cedula: ");
 				Cliente* cl = clientes->buscarPorId(id);
 				//si el puntero es NULL, significa que no se encontró el cliente
-				if (cl != NULL) {cout << "Encontrado: " << cl->getNombreCompleto() << endl << "Tel: " << cl->getTelefono() << endl << endl;}
-				else { cout << "No encontrado." << endl; }
+			if (cl != NULL) {cout << "Encontrado: " << cl->getNombreCompleto() << endl << "Tel: " << cl->getTelefono() << endl << endl;}
+			else { cout << "No encontrado." << endl; }
+				esperarEnter();
 			
 			}else if (s == 3) { clientes->listarClientes(); }//Listar clientes
+				if (s == 3) { clientes->listarClientes(); esperarEnter(); }//Listar clientes
 			break;
 
 		}//cierra el bloque de case 2 para que las variables locales no den error
 		
 		case 3: {//Reservas
-
+			limpiarPantalla();
 			cout << endl << "-- Reservas --" << endl;
 			cout << "1. Agregar Reserva\n2. Cancelar Reserva" << endl;
 
@@ -183,11 +215,12 @@ void Menu::mostrarMenu() {
 				Cliente* cl = clientes->buscarPorId(id);
 
 				if (cl == NULL) {cout << "Cliente no encontrado. Registrelo primero." << endl;}
+				if (cl == NULL) {cout << "Cliente no encontrado. Registrelo primero." << endl; esperarEnter();}
 				else {
 					int codigo = leerEntero("Codigo cancha: ");
 					Cancha* c = canchas->buscarPorCodigo(codigo);
 
-					if (c == NULL) {cout << "Cancha no encontrada."<< endl;}
+					if (c == NULL) {cout << "Cancha no encontrada."<< endl; esperarEnter();}
 					else {
 						int inicio = leerEntero("Franja inicio (0-11): ");
 						int horas = leerEntero("Cantidad de horas: ");
@@ -195,6 +228,7 @@ void Menu::mostrarMenu() {
 						//envia por parametros el puntero a cliente, el puntero a cancha, la franja de inicio y la cantidad de horas
 						if (reservas->agregarReserva(cl, c, inicio, horas)) {cout << "Reserva agregada." << endl;}
 						else {cout << "No se pudo agregar reserva (franjas no disponibles o datos invalidos)." << endl;}
+						esperarEnter();
 					}
 				}
 			}else if (s == 2) {//Cancelar reserva
@@ -203,6 +237,7 @@ void Menu::mostrarMenu() {
 
 				if (reservas->cancelarReserva(cons, espera)) { cout << "Reserva cancelada." << endl; }
 				else { cout << "No se pudo cancelar." << endl; }
+				esperarEnter();
 			}
 			break;
 		

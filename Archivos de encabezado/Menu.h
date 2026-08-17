@@ -21,6 +21,8 @@ private:
 	int leerEntero(const string& prompt);
 	double leerDouble(const string& prompt);
 	string leerLinea(const string& prompt);
+	void limpiarPantalla();//seria mas facil con el #include "windows.h" y system("cls"), pero las indicaciones del proyecto lo impiden
+	void esperarEnter();//para pausas antes de "limpiar" la pantalla
 
 public:
 	Menu();
@@ -29,4 +31,4 @@ public:
 	void mostrarMenu();
 };
 
-#endif // MENU_H
+

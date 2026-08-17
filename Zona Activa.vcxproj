@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-	<ProjectConfiguration Include="Debug|x64">
-	  <Configuration>Debug</Configuration>
-	  <Platform>x64</Platform>
-	</ProjectConfiguration>
-	<ProjectConfiguration Include="Release|x64">
-	  <Configuration>Release</Configuration>
-	  <Platform>x64</Platform>
-	</ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-	<ProjectGuid>{D1A2B3C4-1234-4ABC-9DEF-0123456789AB}</ProjectGuid>
-	<Keyword>Win32Proj</Keyword>
-	<RootNamespace>Zona_Activa</RootNamespace>
+    <ProjectGuid>{D1A2B3C4-1234-4ABC-9DEF-0123456789AB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Zona_Activa</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup>
-	<ConfigurationType>Application</ConfigurationType>
-	<UseDebugLibraries>true</UseDebugLibraries>
-	<PlatformToolset>v142</PlatformToolset>
-	<CharacterSet>MultiByte</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ItemGroup>
-	<!-- Header files -->
-	<ClInclude Include="Archivos de encabezado\Cancha.h" />
-	<ClInclude Include="Archivos de encabezado\Cliente.h" />
-	<ClInclude Include="Archivos de encabezado\ColeccionCanchas.h" />
-	<ClInclude Include="Archivos de encabezado\ColeccionClientes.h" />
-	<ClInclude Include="Archivos de encabezado\ColeccionEspera.h" />
-	<ClInclude Include="Archivos de encabezado\ColeccionReservas.h" />
-	<ClInclude Include="Archivos de encabezado\Menu.h" />
-	<ClInclude Include="Archivos de encabezado\RegistroEspera.h" />
-	<ClInclude Include="Archivos de encabezado\Reportes.h" />
-	<ClInclude Include="Archivos de encabezado\Reserva.h" />
+    <!-- Header files -->
+    <ClInclude Include="Archivos de encabezado\Cancha.h" />
+    <ClInclude Include="Archivos de encabezado\Cliente.h" />
+    <ClInclude Include="Archivos de encabezado\ColeccionCanchas.h" />
+    <ClInclude Include="Archivos de encabezado\ColeccionClientes.h" />
+    <ClInclude Include="Archivos de encabezado\ColeccionEspera.h" />
+    <ClInclude Include="Archivos de encabezado\ColeccionReservas.h" />
+    <ClInclude Include="Archivos de encabezado\Menu.h" />
+    <ClInclude Include="Archivos de encabezado\RegistroEspera.h" />
+    <ClInclude Include="Archivos de encabezado\Reportes.h" />
+    <ClInclude Include="Archivos de encabezado\Reserva.h" />
   </ItemGroup>
   <ItemGroup>
-	<!-- Source files -->
-	<ClCompile Include="Archivos de origen\Cancha.cpp" />
-	<ClCompile Include="Archivos de origen\Cliente.cpp" />
-	<ClCompile Include="Archivos de origen\ColeccionCanchas.cpp" />
-	<ClCompile Include="Archivos de origen\ColeccionClientes.cpp" />
-	<ClCompile Include="Archivos de origen\ColeccionEspera.cpp" />
-	<ClCompile Include="Archivos de origen\ColeccionReservas.cpp" />
-	<ClCompile Include="Archivos de origen\Menu.cpp" />
-	<ClCompile Include="Archivos de origen\RegistroEspera.cpp" />
-	<ClCompile Include="Archivos de origen\Reportes.cpp" />
-	<ClCompile Include="Archivos de origen\Reserva.cpp" />
-	<ClCompile Include="main.cpp" />
+    <!-- Source files -->
+    <ClCompile Include="Archivos de origen\Cancha.cpp" />
+    <ClCompile Include="Archivos de origen\Cliente.cpp" />
+    <ClCompile Include="Archivos de origen\ColeccionCanchas.cpp" />
+    <ClCompile Include="Archivos de origen\ColeccionClientes.cpp" />
+    <ClCompile Include="Archivos de origen\ColeccionEspera.cpp" />
+    <ClCompile Include="Archivos de origen\ColeccionReservas.cpp" />
+    <ClCompile Include="Archivos de origen\Menu.cpp" />
+    <ClCompile Include="Archivos de origen\RegistroEspera.cpp" />
+    <ClCompile Include="Archivos de origen\Reportes.cpp" />
+    <ClCompile Include="Archivos de origen\Reserva.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemDefinitionGroup>
-	<ClCompile>
-	  <AdditionalIncludeDirectories>Archivos de encabezado;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-	  <WarningLevel>Level3</WarningLevel>
-	  <Optimization>Disabled</Optimization>
-	</ClCompile>
+    <ClCompile>
+      <AdditionalIncludeDirectories>Archivos de encabezado;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>
