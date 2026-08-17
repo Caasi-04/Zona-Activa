@@ -8,7 +8,17 @@ ColeccionClientes::ColeccionClientes()
 }
 
 ColeccionClientes::~ColeccionClientes(){
-	delete[] clientes;//el arreglo, los clientes no
+	// Eliminar cada Cliente* almacenado y luego liberar el arreglo
+	if (clientes != NULL) {
+		for (int i = 0; i < cantidad; ++i) {
+			if (clientes[i] != NULL) {
+				delete clientes[i];
+				clientes[i] = NULL;
+			}
+		}
+		delete[] clientes;
+		clientes = NULL;
+	}
 }
 
 bool ColeccionClientes::registrarCliente(Cliente* cliente){
@@ -36,3 +46,9 @@ void ColeccionClientes::listarClientes() const{
 }
 
 int ColeccionClientes::getCantidad() const { return cantidad; }//retorna la cantidad de clientes registrados
+
+//retorna el cliente en la posicion index, o NULL si index es invalido
+Cliente* ColeccionClientes::getClienteAt(int index) const {
+	if (index < 0 || index >= cantidad) {return NULL;}
+	return clientes[index];
+}

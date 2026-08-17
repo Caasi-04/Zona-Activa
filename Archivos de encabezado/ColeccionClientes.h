@@ -20,6 +20,7 @@ public:
 	void listarClientes() const;
 
 	int getCantidad() const;
+	Cliente* getClienteAt(int index) const;//retorna el cliente en la posicion index, o NULL si index es invalido
 };
 
 

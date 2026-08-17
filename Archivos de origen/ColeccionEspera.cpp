@@ -8,7 +8,17 @@ ColeccionEspera::ColeccionEspera()
 }
 
 ColeccionEspera::~ColeccionEspera(){
-	delete[] registros;//libera la memoria del arreglo dinámico de punteros a RegistroEspera
+	// Eliminar cada RegistroEspera* almacenado y luego liberar el arreglo
+	if (registros != NULL) {
+		for (int i = 0; i < cantidad; ++i) {
+			if (registros[i] != NULL) {
+				delete registros[i];
+				registros[i] = NULL;
+			}
+		}
+		delete[] registros;
+		registros = NULL;
+	}
 }
 
 bool ColeccionEspera::agregarRegistro(RegistroEspera* reg) {//recibe un puntero a un objeto RegistroEspera y lo agrega al arreglo dinámico de registros si hay espacio disponible

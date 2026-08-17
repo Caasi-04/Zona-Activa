@@ -25,6 +25,7 @@ public:
 	bool liberarMantenimiento(int codigo, int franja); // pone 'L'
 
 	int getCantidad() const;
+	Cancha* getCanchaAt(int index) const;// Retorna un puntero a Cancha en la posición index del arreglo canchas, o NULL si el índice es inválido
 };
 
 

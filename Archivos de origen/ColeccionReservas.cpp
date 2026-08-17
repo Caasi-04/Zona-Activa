@@ -8,7 +8,17 @@ ColeccionReservas::ColeccionReservas()
 }
 
 ColeccionReservas::~ColeccionReservas(){
-	delete[] reservas;// eliminamos el arreglo dinámico, pero no los objetos Reserva, ya que podrían estar siendo usados en otro lugar
+	// Eliminar cada Reserva* almacenada y luego liberar el arreglo
+	if (reservas != NULL) {
+		for (int i = 0; i < cantidad; ++i) {
+			if (reservas[i] != NULL) {
+				delete reservas[i];
+				reservas[i] = NULL;
+			}
+		}
+		delete[] reservas;
+		reservas = NULL;
+	}
 }
 
 bool ColeccionReservas::agregarReserva(Cliente* cliente, Cancha* cancha, int franjaInicio, int cantidadHoras){
@@ -53,7 +63,7 @@ bool ColeccionReservas::cancelarReserva(int consecutivo, ColeccionEspera* espera
 
 	for (int i = inicio; i < inicio + horas; ++i) {
 		if (cancha->getFranja(i) == 'O') {//si la cancha estaba ocupada
-			cancha->setFranja(i, 'L')//se libera la franja
+			cancha->setFranja(i, 'L'); //se libera la franja
 
 			if (espera != NULL) {//si hay lista de espera
 				//se busca si hay alguien en lista de espera para esa cancha y franja
@@ -71,3 +81,9 @@ bool ColeccionReservas::cancelarReserva(int consecutivo, ColeccionEspera* espera
 }
 
 int ColeccionReservas::getCantidad() const { return cantidad; }//retorna la cantidad de reservas registradas
+
+//retorna la reserva en la posición index del arreglo de reservas, o NULL si el index es inválido
+Reserva* ColeccionReservas::getReservaAt(int index) const {
+	if (index < 0 || index >= cantidad) {return NULL;}
+	return reservas[index];
+}

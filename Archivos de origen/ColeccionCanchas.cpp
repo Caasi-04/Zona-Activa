@@ -7,7 +7,20 @@ ColeccionCanchas::ColeccionCanchas()
 	for (int i = 0; i < capacidad; ++i) canchas[i] = NULL; //inicializa todos los punteros a NULL o sea vacios, solo para evitar errores de momoria
 }
 
-ColeccionCanchas::~ColeccionCanchas(){delete[] canchas;} // No se eliminan las Cancha* almacenadas aquí. solo el arreglo
+ColeccionCanchas::~ColeccionCanchas()
+{
+	// Eliminar cada Cancha* almacenada y luego el arreglo
+	if (canchas != NULL) {
+		for (int i = 0; i < cantidad; ++i) {
+			if (canchas[i] != NULL) {
+				delete canchas[i];
+				canchas[i] = NULL;
+			}
+		}
+		delete[] canchas;
+		canchas = NULL;
+	}
+}
 
 bool ColeccionCanchas::agregarCancha(Cancha* cancha) {
 	if (cancha == NULL) return false; //si el puntero es nulo, no se puede agregar
@@ -55,3 +68,9 @@ bool ColeccionCanchas::liberarMantenimiento(int codigo, int franja){
 }
 
 int ColeccionCanchas::getCantidad() const { return cantidad; }//cantidad empieza en 0 y se incrementa cuando se crea una cancha
+
+// Retorna un puntero a Cancha en la posición index del arreglo canchas, o NULL si el índice es inválido
+Cancha* ColeccionCanchas::getCanchaAt(int index) const {
+	if (index < 0 || index >= cantidad) {return NULL;}
+	return canchas[index];
+}

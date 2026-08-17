@@ -22,6 +22,7 @@ public:
 	bool cancelarReserva(int consecutivo, ColeccionEspera* espera);
 
 	int getCantidad() const;
+	Reserva* getReservaAt(int index) const;//retorna un puntero a reserva, o NULL si no encuentra
 };
 
 
