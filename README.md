@@ -15,6 +15,7 @@ Estructura del proyecto
 - Archivos de encabezado/: archivos .h (declaraciones de clases).
 - Archivos de origen/: archivos .cpp (implementaciones).
 - main.cpp: función main() limpia que instancia la clase Menu y arranca la aplicación.
+- Los archivos que empiezan con el nombre "Zona Activa" independientemente de su extensión no cumplen ninguna función especifica en el proyecto, son un requisito para poder ejecutarlo y puede fallar tras su eliminación, se recomienda dejarlos como están e ignorarlos
 
 Clases principales
 ------------------
