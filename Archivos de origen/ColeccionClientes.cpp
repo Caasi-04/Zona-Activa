@@ -16,7 +16,7 @@ ColeccionClientes::~ColeccionClientes(){
 				clientes[i] = NULL;
 			}
 		}
-		delete[] clientes;
+		delete[] clientes; //libera memoria del arreglo dinamico
 		clientes = NULL;
 	}
 }
@@ -38,7 +38,7 @@ Cliente* ColeccionClientes::buscarPorId(const string& id) const {
 }
 
 void ColeccionClientes::listarClientes() const{
-	for (int i = 0; i < cantidad; ++i) {
+	for (int i = 0; i < cantidad; i++) {
 		if (clientes[i] != NULL) {
 			cout << "Cedula: " << clientes[i]->getId() << endl <<"Nombre: " << clientes[i]->getNombreCompleto() <<endl<< "Tel: " << clientes[i]->getTelefono() << endl<<endl;//despliega informacion de los clientes con un espacio en blanco para separarlos
 		}

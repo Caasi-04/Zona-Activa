@@ -21,8 +21,7 @@ void Menu::limpiarPantalla(){
 	cout << string(100, '\n');
 }
 
-void Menu::esperarEnter()
-{
+void Menu::esperarEnter(){ //basicamente para pausarlo antes de limpiar pantalla despues de mostrar datos
 	cout << "\nPresione Enter para continuar...";
 	string tmp;
 	getline(cin, tmp);
@@ -39,7 +38,7 @@ Menu::~Menu(){
 int Menu::leerEntero(const string& prompt){//esto lo vimos en fundamentos de programacion
 
 	int value;
-	while (true) {//No pasa hasta que se ingrese algo valido segun lo solicitado
+	while (true) {//No se detiene hasta que se ingrese algo valido segun lo solicitado
 
 		cout << prompt;//muestra el mensaje de prompt
 		cin >> value;
@@ -196,8 +195,7 @@ void Menu::mostrarMenu() {
 			else { cout << "No encontrado." << endl; }
 				esperarEnter();
 			
-			}else if (s == 3) { clientes->listarClientes(); }//Listar clientes
-				if (s == 3) { clientes->listarClientes(); esperarEnter(); }//Listar clientes
+			}else if (s == 3) { clientes->listarClientes(); esperarEnter(); }//Listar clientes
 			break;
 
 		}//cierra el bloque de case 2 para que las variables locales no den error
@@ -211,10 +209,21 @@ void Menu::mostrarMenu() {
 
 			if (s == 1) {//Agregar reserva
 
+				/*
+				---Esto deja agregar a la lista de espera a alguien que ya está en la cancha.
+				---También deja agregar a la lista de espera más de una vez a la misma persona.
+
+				Debido a que un grupo de personas podría organizar ya sea un torneo o varios partidos consecutivos y estos
+				pueden terminar en cualquier momento entonces se pueden hacer varias reservas seguidas y que pueda cancelarlas 
+				si ya después no las necesita.
+
+				En caso de algún evendo donde el negocio prohiba hacer reservas de mas de x cantidad de horas entonces esto abre 
+				la posibilidad a que se hagan varias reservas seguidas.
+				*/
+
 				string id = leerLinea("ID cliente: ");
 				Cliente* cl = clientes->buscarPorId(id);
 
-				if (cl == NULL) {cout << "Cliente no encontrado. Registrelo primero." << endl;}
 				if (cl == NULL) {cout << "Cliente no encontrado. Registrelo primero." << endl; esperarEnter();}
 				else {
 					int codigo = leerEntero("Codigo cancha: ");
@@ -224,9 +233,13 @@ void Menu::mostrarMenu() {
 					else {
 						int inicio = leerEntero("Franja inicio (0-11): ");
 						int horas = leerEntero("Cantidad de horas: ");
-
 						//envia por parametros el puntero a cliente, el puntero a cancha, la franja de inicio y la cantidad de horas
-						if (reservas->agregarReserva(cl, c, inicio, horas)) {cout << "Reserva agregada." << endl;}
+						if (reservas->agregarReserva(cl, c, inicio, horas)) {
+							//obtiene el consecutivo para darselo al cliente ya que lo necesita para cancelar la reserva si lo necesitara
+							Reserva* ultima = reservas->getReservaAt(reservas->getCantidad() - 1);
+							limpiarPantalla();
+							cout << "Reserva agregada. \nEl numero consecutivo es: " << ultima->getConsecutivo() << endl;
+						}
 						else {cout << "No se pudo agregar reserva (franjas no disponibles o datos invalidos)." << endl;}
 						esperarEnter();
 					}
@@ -261,7 +274,9 @@ void Menu::mostrarMenu() {
 					if (espera->agregarSiFranjaO(cl, c, fr)) {cout << "Agregado a lista de espera." << endl;					}
 					else {cout << "No se pudo agregar a la lista de espera (franja no ocupada o en mantenimiento)." << endl;}
 				}
+				
 			}
+			esperarEnter();
 			break;
 
 		}//cierra el bloque de case 4 para que las variables locales no den error
@@ -287,7 +302,7 @@ void Menu::mostrarMenu() {
 			reportes.franjasMasMenosDemandadas(reservas, horaMas, horaMenos);
 			if (horaMas >= 0) {cout << "Franja mas demandada: " << horaMas << ", menos demandada: " << horaMenos << "\n";}
 			else {cout << "No hay datos de franjas." << endl;}
-
+			esperarEnter();
 			break;
 		}//cierra el bloque de case 5 para que las variables locales no den error
 
